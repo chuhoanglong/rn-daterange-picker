@@ -15,6 +15,7 @@ import Header from "./components/Header";
 import { height, width } from "./modules";
 import chevronL from "./assets/chevronL.png";
 import chevronR from "./assets/chevronR.png";
+import bin from "./assets/bin.png";
 
 const DateRangePicker = ({
   moment,
@@ -102,6 +103,7 @@ const DateRangePicker = ({
     if (!endDate) {
       onChange({
         endDate: startDate,
+        displayedDate: _moment,
       });
     }
   };
@@ -219,7 +221,9 @@ const DateRangePicker = ({
     function populateHeaders() {
       let _dayHeaders = [];
       for (let i = 0; i <= 6; ++i) {
-        let day = _moment(displayedDate).weekday(i).format("dddd").substr(0, 2);
+        let day = _moment(displayedDate).weekday(i).format("d");
+        day = parseInt(day) + 1;
+        day = day == 1 ? day = 'CN' : 'T' + day;
         _dayHeaders.push(
           <Header
             key={`dayHeader-${i}`}
@@ -350,8 +354,8 @@ const DateRangePicker = ({
                 )}
               </TouchableOpacity>
               <Text style={mergedStyles.headerText}>
-                {displayedDate.format("MMMM") +
-                  " " +
+                {displayedDate.format("MM") +
+                  " / " +
                   displayedDate.format("YYYY")}
               </Text>
               <TouchableOpacity onPress={nextMonth}>
@@ -377,7 +381,7 @@ const DateRangePicker = ({
                   buttonTextStyle={buttonTextStyle}
                   onPress={today}
                 >
-                  Today
+                  Hôm nay
                 </Button>
                 {range && (
                   <>
@@ -386,19 +390,32 @@ const DateRangePicker = ({
                       buttonTextStyle={buttonTextStyle}
                       onPress={thisWeek}
                     >
-                      This Week
+                      Tuần này
                     </Button>
                     <Button
                       buttonStyle={buttonStyle}
                       buttonTextStyle={buttonTextStyle}
                       onPress={thisMonth}
                     >
-                      This Month
+                      Tháng này
                     </Button>
                   </>
                 )}
               </View>
             )}
+            <View style={{ alignItems: 'center', }}>
+              <Button
+                buttonStyle={buttonStyle}
+                buttonTextStyle={buttonTextStyle}
+                onPress={thisWeek}
+              >
+                <Image
+                  resizeMode="contain"
+                  style={mergedStyles.monthButtons}
+                  source={bin}
+                />
+              </Button>
+            </View>
           </View>
         </View>
       </View>
