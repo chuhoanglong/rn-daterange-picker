@@ -102,7 +102,8 @@ const DateRangePicker = ({
     setSelecting(false);
     if (!endDate) {
       onChange({
-        endDate: startDate,
+        startDate,
+        endDate,
         displayedDate: _moment,
       });
     }
@@ -110,12 +111,16 @@ const DateRangePicker = ({
 
   const previousMonth = () => {
     onChange({
+      startDate,
+      endDate,
       displayedDate: _moment(displayedDate).subtract(1, "months"),
     });
   };
 
   const nextMonth = () => {
     onChange({
+      startDate,
+      endDate,
       displayedDate: _moment(displayedDate).add(1, "months"),
     });
   };
@@ -142,8 +147,8 @@ const DateRangePicker = ({
       setSelecting(true);
       onChange({
         date: null,
-        startDate: _moment(),
-        endDate: null,
+        startDate: _moment().hours(0).minutes(0).seconds(0).milliseconds(0),
+        endDate: _moment().hours(24).minutes(0).seconds(0).milliseconds(0),
         selecting: true,
         displayedDate: _moment(),
       });
@@ -159,37 +164,54 @@ const DateRangePicker = ({
   };
 
   const thisWeek = () => {
-    setSelecting(false);
+    setSelecting(true);
     onChange({
       date: null,
       startDate: _moment().startOf("week"),
       endDate: _moment().endOf("week"),
       displayedDate: _moment(),
+      selecting: true,
     });
   };
 
   const thisMonth = () => {
-    setSelecting(false);
+    setSelecting(true);
     onChange({
       date: null,
       startDate: _moment().startOf("month"),
       endDate: _moment().endOf("month"),
       displayedDate: _moment(),
+      selecting: true,
     });
   };
 
+  const thisRemove = () => {
+    setSelecting(false);
+    onChange({
+      startDate: null,
+      endDate: null,
+    });
+  }
+
   const select = useCallback(
     (day) => {
-      let _date = _moment(displayedDate);
-      _date.set("date", day);
+      let _date = _moment(displayedDate).hours(0).minutes(0).seconds(0).milliseconds(0);
+      _date.set({ date: day, });
       if (range) {
         if (selecting) {
           if (_date.isBefore(startDate, "day")) {
             setSelecting(true);
-            onChange({ startDate: _date });
+            onChange({
+              startDate: _date.set({ date: day, hour: 0, minute: 0, second: 0 }),
+              endDate: null,
+            });
           } else {
             setSelecting(!selecting);
-            onChange({ endDate: _date });
+            onChange({
+              startDate,
+              endDate: _date.set({ date: day, hour: 24, minute: 0, second: 0 }),
+              selecting: true,
+            });
           }
         } else {
           setSelecting(!selecting);
@@ -407,11 +429,11 @@ const DateRangePicker = ({
               <Button
                 buttonStyle={buttonStyle}
                 buttonTextStyle={buttonTextStyle}
-                onPress={thisWeek}
+                onPress={thisRemove}
               >
                 <Image
                   resizeMode="contain"
-                  style={mergedStyles.monthButtons}
+                  style={{ width: 20, height: 20 }}
                   source={bin}
                 />
               </Button>
