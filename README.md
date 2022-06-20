@@ -1,4 +1,4 @@
-# react-native-daterange-picker
+# rn-daterange-picker
 
 A React Native component for picking date ranges or single dates.
 
@@ -9,11 +9,11 @@ A React Native component for picking date ranges or single dates.
 
 ## Installation
 
-`yarn add react-native-daterange-picker`
+`yarn add rn-daterange-picker`
 
 or
 
-`npm install --save react-native-daterange-picker`
+`npm install --save rn-daterange-picker`
 
 ## Usage
 
@@ -23,7 +23,7 @@ or
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import moment from "moment";
-import DateRangePicker from "react-native-daterange-picker";
+import DateRangePicker from "rn-daterange-picker";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -79,7 +79,7 @@ Use the `date` prop instead of the `startDate` and `endDate` props.
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import moment from "moment";
-import DateRangePicker from "react-native-daterange-picker";
+import DateRangePicker from "rn-daterange-picker";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -132,7 +132,7 @@ Use the `minDate` and `maxDate` props to disable the dates that aren't allowed.
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import moment from "moment";
-import DateRangePicker from "react-native-daterange-picker";
+import DateRangePicker from "rn-daterange-picker";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -189,7 +189,7 @@ Simply pass your custom Moment object with locale attached to it as a prop.
 ```js
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import DateRangePicker from "react-native-daterange-picker";
+import DateRangePicker from "rn-daterange-picker";
 
 import moment from "moment/min/moment-with-locales";
 moment.locale("en");
