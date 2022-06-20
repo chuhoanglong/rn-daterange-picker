@@ -1,6 +1,6 @@
 import momentDefault from "moment";
 import PropTypes from "prop-types";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, forwardRef, useImperativeHandle } from "react";
 import {
   StyleSheet,
   Text,
@@ -47,7 +47,7 @@ const DateRangePicker = ({
   buttonTextStyle,
   presetButtons,
   open,
-}) => {
+}, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [weeks, setWeeks] = useState([]);
   const [selecting, setSelecting] = useState(false);
@@ -323,6 +323,11 @@ const DateRangePicker = ({
     </View>
   );
 
+  useImperativeHandle(ref, () => ({
+    _onOpen,
+    _onClose
+  }))
+
   return isOpen ? (
     <>
       <View style={mergedStyles.backdrop}>
@@ -404,7 +409,7 @@ const DateRangePicker = ({
   );
 };
 
-export default DateRangePicker;
+export default forwardRef(DateRangePicker);
 
 DateRangePicker.defaultProps = {
   dayHeaders: true,
