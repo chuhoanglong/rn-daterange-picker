@@ -272,6 +272,7 @@ const styles = StyleSheet.create({
 | monthNextButton      | Node     |         no          |              | Icon for next button.                                                                                                                                                   |
 | monthButtonsStyle    | Object   |         no          |              | Styling for month prev/next buttons.                                                                                                                                    |
 | moment               | Moment   |         no          |              | Custom Moment object, useful for setting custom locale.                                                                                                                 |
+| iconBin               | Object, String   |         no          |              |  Icon for button remove.                                                                                                             |
 
 ## Questions & Suggestions
 

@@ -48,6 +48,9 @@ const DateRangePicker = ({
   buttonTextStyle,
   presetButtons,
   open,
+  iconBin,
+  iconLeft,
+  iconRight,
 }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [weeks, setWeeks] = useState([]);
@@ -371,7 +374,7 @@ const DateRangePicker = ({
                   <Image
                     resizeMode="contain"
                     style={mergedStyles.monthButtons}
-                    source={chevronL}
+                    source={iconLeft ? iconLeft : chevronL}
                   ></Image>
                 )}
               </TouchableOpacity>
@@ -385,7 +388,7 @@ const DateRangePicker = ({
                   <Image
                     resizeMode="contain"
                     style={mergedStyles.monthButtons}
-                    source={chevronR}
+                    source={iconRight ? iconRight : chevronR}
                   />
                 )}
               </TouchableOpacity>
@@ -434,7 +437,7 @@ const DateRangePicker = ({
                 <Image
                   resizeMode="contain"
                   style={{ width: 20, height: 20 }}
-                  source={bin}
+                  source={['object', 'string', 'number'].includes(typeof (iconBin)) ? iconBin : bin}
                 />
               </Button>
             </View>
